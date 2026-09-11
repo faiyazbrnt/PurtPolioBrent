@@ -112,7 +112,7 @@ export const FooterEditorial: React.FC<FooterEditorialProps> = ({ config, onResu
 
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#E5E5E5] hover:text-[#FB8B24] transition-colors self-start sm:self-auto py-1"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#E5E5E5] hover:text-[#FB8B24] transition-colors self-start sm:self-auto py-2 min-h-[44px] cursor-pointer"
             aria-label="Back to top"
           >
             <span>BACK TO TOP</span>

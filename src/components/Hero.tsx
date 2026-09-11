@@ -144,9 +144,9 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
               */}
               <h1
                 id="hero-editorial-headline"
-                className="font-editorial-serif text-[#11151A] dark:text-[#F5F3ED] font-normal tracking-[-0.03em] select-none break-words"
+                className="font-editorial-serif text-[#11151A] dark:text-[#F5F3ED] font-normal tracking-[-0.03em] select-none break-words hyphens-auto"
                 style={{
-                  fontSize: 'clamp(2.25rem, 6.5vw, 5.85rem)',
+                  fontSize: 'clamp(2rem, 6.2vw, 5.85rem)',
                   lineHeight: 1.02,
                 }}
               >
@@ -163,9 +163,9 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
               </div>
 
               {/* Visual rhythm separator with engineering metrics */}
-              <div className="pt-5 sm:pt-6 grid grid-cols-3 gap-3 sm:gap-6 border-t border-[#11151A]/15 dark:border-[#F5F3ED]/15 max-w-xl">
+              <div className="pt-5 sm:pt-6 grid grid-cols-3 gap-2.5 sm:gap-6 border-t border-[#11151A]/15 dark:border-[#F5F3ED]/15 max-w-xl">
                 <div>
-                  <span className="block text-xl sm:text-2xl md:text-3xl font-editorial-serif text-[#11151A] dark:text-[#F5F3ED]">
+                  <span className="block text-lg sm:text-2xl md:text-3xl font-editorial-serif text-[#11151A] dark:text-[#F5F3ED]">
                     02
                   </span>
                   <span className="text-[9px] sm:text-[10px] font-editorial-mono uppercase tracking-wider sm:tracking-widest text-[#11151A]/60 dark:text-white/50 block truncate font-medium">
@@ -173,7 +173,7 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
                   </span>
                 </div>
                 <div>
-                  <span className="block text-xl sm:text-2xl md:text-3xl font-editorial-serif text-[#FB8B24]">
+                  <span className="block text-lg sm:text-2xl md:text-3xl font-editorial-serif text-[#FB8B24]">
                     100%
                   </span>
                   <span className="text-[9px] sm:text-[10px] font-editorial-mono uppercase tracking-wider sm:tracking-widest text-[#11151A]/60 dark:text-white/50 block truncate font-medium">
@@ -181,7 +181,7 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
                   </span>
                 </div>
                 <div>
-                  <span className="block text-xl sm:text-2xl md:text-3xl font-editorial-serif text-[#11151A] dark:text-[#F5F3ED]">
+                  <span className="block text-base sm:text-2xl md:text-3xl font-editorial-serif text-[#11151A] dark:text-[#F5F3ED] truncate">
                     MS Teams
                   </span>
                   <span className="text-[9px] sm:text-[10px] font-editorial-mono uppercase tracking-wider sm:tracking-widest text-[#11151A]/60 dark:text-white/50 block truncate font-medium">
@@ -195,8 +195,8 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
       </div>
 
       {/* Footer of Hero: Asymmetrical scroll indicator & coordinate footer */}
-      <div className="max-w-7xl mx-auto w-full pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-editorial-mono text-[#11151A]/60 dark:text-white/40 border-t border-[#11151A]/10 dark:border-[#F5F3ED]/10">
-        <div className="flex items-center gap-3">
+      <div className="max-w-7xl mx-auto w-full pt-6 sm:pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 text-[11px] sm:text-xs font-editorial-mono text-[#11151A]/60 dark:text-white/40 border-t border-[#11151A]/10 dark:border-[#F5F3ED]/10">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <span>COORDINATES:</span>
           <span className="text-[#11151A]/70 dark:text-[#E5E5E5]/70">35.6762° N, 139.6503° E</span>
           <span className="hidden sm:inline-block">/</span>
@@ -205,7 +205,7 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
           </span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <span className="animate-bounce">↓</span>
           <span className="tracking-widest uppercase text-[#11151A]/70 dark:text-[#E5E5E5]/70 font-medium">
             SCROLL TO INSPECT ARCHIVES
