@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { PortfolioConfig } from '../types';
-import { ArrowDownRight, Terminal, Cpu, Layers } from 'lucide-react';
+import { ArrowDownRight, Terminal, Cpu, Layers, Download } from 'lucide-react';
+import { downloadCv } from '../utils/downloadCv';
 
 interface HeroProps {
   config: PortfolioConfig;
@@ -120,6 +121,19 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
               >
                 <span>EXPLORE WORK</span>
                 <ArrowDownRight className="w-4 h-4 transform group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
+              </button>
+
+              <span className="text-[#11151A]/30 dark:text-[#F5F3ED]/30 text-xs font-editorial-mono">/</span>
+
+              <button
+                id="hero-download-cv-btn"
+                type="button"
+                onClick={downloadCv}
+                className="group inline-flex items-center gap-1.5 text-xs font-editorial-mono uppercase tracking-[0.2em] text-[#FB8B24] hover:text-[#E36414] transition-colors py-2 font-medium cursor-pointer"
+                title="Download cv.pdf"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>DOWNLOAD CV</span>
               </button>
             </div>
           </motion.div>

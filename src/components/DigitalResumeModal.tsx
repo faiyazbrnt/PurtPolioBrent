@@ -24,7 +24,9 @@ import {
   Award,
   CheckCircle2,
   FileBadge,
+  ExternalLink,
 } from 'lucide-react';
+import { downloadCv } from '../utils/downloadCv';
 
 interface DigitalResumeModalProps {
   isOpen: boolean;
@@ -38,6 +40,7 @@ export const DigitalResumeModal: React.FC<DigitalResumeModalProps> = ({
   config,
 }) => {
   const [copied, setCopied] = useState<boolean>(false);
+  const [viewTab, setViewTab] = useState<'formatted' | 'pdf'>('formatted');
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -151,41 +154,65 @@ ${config.references || 'Available Upon Request'}
           className="w-full max-w-4xl bg-[#11151A] border border-[#F5F3ED]/25 text-[#D0D0D0] my-auto shadow-2xl relative max-h-[94vh] sm:max-h-[92vh] flex flex-col"
         >
           {/* Top Control Bar */}
-          <div className="flex items-center justify-between px-3 sm:px-6 py-2.5 sm:py-4 border-b border-[#F5F3ED]/15 bg-[#171C23] no-print gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3.5 border-b border-[#F5F3ED]/15 bg-[#171C23] no-print gap-2 sm:gap-3">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               <span className="text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-editorial-mono text-[#FB8B24] uppercase whitespace-nowrap shrink-0">
-                <span className="inline sm:hidden">[ CREDENTIALS ]</span>
+                <span className="inline sm:hidden">[ CV ]</span>
                 <span className="hidden sm:inline">[ CREDENTIALS // CURRICULUM VITAE ]</span>
               </span>
-              <span className="text-white/30 hidden lg:inline">|</span>
-              <span className="text-xs font-editorial-mono text-white/50 hidden lg:inline whitespace-nowrap truncate">
-                {config.developerRole.toUpperCase()}
-              </span>
+              
+              {/* Tab Selector */}
+              <div className="flex items-center bg-black/40 p-0.5 border border-white/10 rounded-sm ml-1 sm:ml-2">
+                <button
+                  type="button"
+                  onClick={() => setViewTab('formatted')}
+                  className={`px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-editorial-mono uppercase transition-colors ${
+                    viewTab === 'formatted'
+                      ? 'bg-[#FB8B24] text-[#11151A] font-semibold'
+                      : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  DIGITAL FORMAT
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewTab('pdf')}
+                  className={`px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-editorial-mono uppercase transition-colors ${
+                    viewTab === 'pdf'
+                      ? 'bg-[#FB8B24] text-[#11151A] font-semibold'
+                      : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  OFFICIAL PDF
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <a
-                href="/Brent_Go_Resume.pdf"
-                download="Brent_Go_Resume.pdf"
-                className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 border border-[#FB8B24]/40 hover:border-[#FB8B24] text-[11px] sm:text-xs font-editorial-mono uppercase text-[#FB8B24] transition-colors"
-                title="Download Resume PDF"
-                aria-label="Download Resume PDF"
+              <button
+                type="button"
+                onClick={downloadCv}
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 border border-[#FB8B24] bg-[#FB8B24]/10 hover:bg-[#FB8B24] text-[11px] sm:text-xs font-editorial-mono uppercase text-[#FB8B24] hover:text-[#11151A] transition-all font-medium cursor-pointer"
+                title="Download cv.pdf directly"
+                aria-label="Download cv.pdf"
               >
                 <Download className="w-3.5 h-3.5 shrink-0" />
-                <span className="hidden sm:inline">DOWNLOAD PDF</span>
-              </a>
+                <span className="hidden sm:inline">DOWNLOAD CV.PDF</span>
+              </button>
 
               <button
+                type="button"
                 onClick={handlePrint}
                 className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 border border-[#F5F3ED]/20 hover:border-white text-[11px] sm:text-xs font-editorial-mono uppercase text-[#F5F3ED] transition-colors"
                 title="Print or Save as PDF"
                 aria-label="Print or Save as PDF"
               >
                 <Printer className="w-3.5 h-3.5 shrink-0" />
-                <span className="hidden sm:inline">PRINT / PDF</span>
+                <span className="hidden sm:inline">PRINT</span>
               </button>
 
               <button
+                type="button"
                 onClick={handleCopyMarkdown}
                 className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 border border-[#F5F3ED]/20 hover:border-white text-[11px] sm:text-xs font-editorial-mono uppercase text-[#F5F3ED] transition-colors"
                 title="Copy Resume as Markdown"
@@ -199,14 +226,15 @@ ${config.references || 'Available Upon Request'}
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5 shrink-0" />
-                    <span className="hidden sm:inline">COPY MARKDOWN</span>
+                    <span className="hidden sm:inline">MARKDOWN</span>
                   </>
                 )}
               </button>
 
               <button
+                type="button"
                 onClick={onClose}
-                className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 transition-colors ml-0.5 sm:ml-2"
+                className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 transition-colors ml-0.5 sm:ml-2 cursor-pointer"
                 aria-label="Close credentials"
               >
                 <X className="w-5 h-5" />
@@ -214,8 +242,40 @@ ${config.references || 'Available Upon Request'}
             </div>
           </div>
 
-          {/* Printable / Viewable Resume Body */}
-          <div className="p-4 sm:p-6 md:p-10 space-y-6 sm:space-y-9 overflow-y-auto flex-1 font-light">
+          {/* Modal Body: PDF Preview Tab OR Digital Formatted Resume */}
+          {viewTab === 'pdf' ? (
+            <div className="flex-1 flex flex-col p-3 sm:p-5 bg-[#0D1117] overflow-hidden min-h-[60vh] sm:min-h-[70vh]">
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 px-1 text-xs font-editorial-mono text-[#D0D0D0] border-b border-white/10 mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#FB8B24] rounded-full"></span>
+                  <span className="text-[#FB8B24] font-medium">BRENT_GO_RESUME.PDF (OFFICIAL)</span>
+                </div>
+                <div className="flex items-center gap-2 text-[11px]">
+                  <span className="text-white/40 hidden md:inline">
+                    Can also be saved or printed in a new window:
+                  </span>
+                  <a
+                    href="/Brent_Go_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[#FB8B24] hover:underline uppercase"
+                  >
+                    <span>OPEN IN NEW TAB</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+              <div className="flex-1 w-full bg-white rounded overflow-hidden shadow-2xl border border-white/10 min-h-[480px]">
+                <iframe
+                  src="/Brent_Go_Resume.pdf#toolbar=1"
+                  className="w-full h-full min-h-[500px] border-0"
+                  title="Official Resume PDF"
+                />
+              </div>
+            </div>
+          ) : (
+            /* Printable / Viewable Resume Body */
+            <div className="p-4 sm:p-6 md:p-10 space-y-6 sm:space-y-9 overflow-y-auto flex-1 font-light">
             {/* Header: Name, Title, Contact */}
             <div className="space-y-4 border-b border-[#F5F3ED]/15 pb-6 sm:pb-8">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 sm:gap-4">
@@ -439,6 +499,7 @@ ${config.references || 'Available Upon Request'}
               <span className="text-[#F5F3ED] font-medium">{config.references || 'Available Upon Request'}</span>
             </div>
           </div>
+          )}
 
           {/* Footer Bar */}
           <div className="px-4 sm:px-6 py-2.5 sm:py-3.5 border-t border-[#F5F3ED]/15 bg-[#171C23] flex flex-row items-center justify-between gap-3 no-print">

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { PortfolioConfig } from '../types';
-import { Sparkles, SlidersHorizontal, Moon, Sun } from 'lucide-react';
+import { Sparkles, SlidersHorizontal, Moon, Sun, Download } from 'lucide-react';
+import { downloadCv } from '../utils/downloadCv';
 
 interface HeaderMetaProps {
   config: PortfolioConfig;
@@ -17,12 +18,12 @@ export const HeaderMeta: React.FC<HeaderMetaProps> = ({
   isDarkMode,
   onToggleDarkMode,
 }) => {
-  // Keyboard shortcut listener: press 'r' or 'R' for resume, 'd' or 'D' for dark mode
+  // Keyboard shortcut listener: press 'r' or 'R' for resume download, 'd' or 'D' for dark mode
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
       if (e.key === 'r' || e.key === 'R') {
-        onResumeClick();
+        downloadCv();
       }
       if (e.key === 'd' || e.key === 'D') {
         onToggleDarkMode();
@@ -30,7 +31,7 @@ export const HeaderMeta: React.FC<HeaderMetaProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onResumeClick, onToggleDarkMode]);
+  }, [onToggleDarkMode]);
 
   return (
     <header
@@ -73,17 +74,17 @@ export const HeaderMeta: React.FC<HeaderMetaProps> = ({
             )}
           </button>
 
-          {/* Resume Download Button */}
-          <a
+          {/* Resume Direct Download Button */}
+          <button
             id="resume-btn"
-            href="/Brent_Go_Resume.pdf"
-            download="Brent_Go_Resume.pdf"
-            className="shrink-0 group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 border border-[#11151A]/30 hover:border-[#11151A] text-[#11151A] hover:bg-[#11151A] hover:text-[#fefae0] dark:border-[#F5F3ED]/30 dark:hover:border-[#F5F3ED] dark:text-[#F5F3ED] dark:hover:bg-[#F5F3ED] dark:hover:text-[#11151A] text-[11px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] font-editorial-sans transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FB8B24] min-h-[38px] w-fit"
-            aria-label="Download Digital Resume"
+            onClick={downloadCv}
+            className="shrink-0 group relative inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 border border-[#11151A]/30 hover:border-[#11151A] text-[#11151A] hover:bg-[#11151A] hover:text-[#fefae0] dark:border-[#F5F3ED]/30 dark:hover:border-[#F5F3ED] dark:text-[#F5F3ED] dark:hover:bg-[#F5F3ED] dark:hover:text-[#11151A] text-[11px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] font-editorial-sans transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#FB8B24] min-h-[38px] w-fit cursor-pointer"
+            aria-label="Download cv.pdf"
+            title="Download cv.pdf"
           >
-            <span className="w-1.5 h-1.5 bg-[#FB8B24] rounded-full group-hover:bg-[#fefae0] dark:group-hover:bg-[#11151A] transition-colors shrink-0" />
-            <span>[RESUME]</span>
-          </a>
+            <Download className="w-3.5 h-3.5 text-[#FB8B24] group-hover:text-[#fefae0] dark:group-hover:text-[#11151A] transition-colors shrink-0" />
+            <span>[DOWNLOAD CV]</span>
+          </button>
         </div>
 
       </div>
