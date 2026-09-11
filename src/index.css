@@ -1,17 +1,27 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
-    --background: #9A031E;
+    --background: #fefae0;
     --foreground: #11151A;
-    --heading: #F5F3ED;
-    --body: #D0D0D0;
-    --navigation: #E5E5E5;
+    --heading: #11151A;
+    --body: #2B2D42;
+    --navigation: #11151A;
 
     --accent-purple: #5F0F40;
     --accent-orange: #FB8B24;
     --accent-red-orange: #E36414;
     --accent-teal: #0F4C5C;
+  }
+
+  html.dark {
+    --background: #0B0E14;
+    --foreground: #F5F3ED;
+    --heading: #F5F3ED;
+    --body: #D0D0D0;
+    --navigation: #E5E5E5;
   }
 
   html {
@@ -41,22 +51,30 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Custom scrollbar matching burgundy aesthetic */
+/* Custom refined scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #5F0F40;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(245, 243, 237, 0.25);
+  background: rgba(17, 21, 26, 0.25);
   border-radius: 3px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(245, 243, 237, 0.25);
+}
+
 ::-webkit-scrollbar-thumb:hover {
+  background: rgba(17, 21, 26, 0.45);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(245, 243, 237, 0.5);
 }
 

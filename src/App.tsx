@@ -24,6 +24,37 @@ export default function App() {
 
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [isPersonalizeOpen, setIsPersonalizeOpen] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_dark_mode');
+      if (saved !== null) {
+        return saved === 'true';
+      }
+    } catch {
+      // fallback
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const handleToggleDarkMode = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('portfolio_dark_mode', String(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  };
 
   const handleSaveConfig = (newConfig: PortfolioConfig) => {
     setConfig(newConfig);
@@ -42,15 +73,21 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#9A031E] text-[#D0D0D0] relative selection:bg-[#FB8B24] selection:text-[#11151A]">
+    <div
+      className={`min-h-screen transition-colors duration-500 text-[#11151A] dark:text-[#D0D0D0] relative selection:bg-[#FB8B24] selection:text-[#11151A] ${
+        isDarkMode ? 'bg-[#0B0E14]' : 'bg-[#fefae0]'
+      }`}
+    >
       {/* Minimalist Interactive Cursor (Disabled on touch devices) */}
       <CustomCursor />
 
-      {/* Top Bar with [ RESUME ] Button & Live Studio Coordinates (No traditional navbar) */}
+      {/* Top Bar with Dark Mode Toggle, [ RESUME ] Button & Live Studio Coordinates */}
       <HeaderMeta
         config={config}
         onResumeClick={() => setIsResumeOpen(true)}
         onPersonalizeClick={() => setIsPersonalizeOpen(true)}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={handleToggleDarkMode}
       />
 
       <main className="w-full">

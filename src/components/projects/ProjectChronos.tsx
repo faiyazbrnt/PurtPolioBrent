@@ -75,7 +75,7 @@ export const ProjectChronos: React.FC<ProjectChronosProps> = ({ project }) => {
                   <Clock className="w-4 h-4 text-[#FB8B24]" />
                   <span className="text-[10px] text-white/40">01</span>
                 </div>
-                <span className="font-semibold text-xs tracking-tight">TimeManagement</span>
+                <span className="font-semibold text-xs tracking-tight">Time Management</span>
               </div>
 
               <div

@@ -41,12 +41,12 @@ export const portfolioProjects: Project[] = [
     summary: 'A Time management and payroll system that is currently live on Mgens Internal system using MS Teams.',
     fullDescription: 'Comprehensive Quality Assurance and system test engineering for Chronos Time and Payroll System, currently live across MGen internal operations and integrated with Microsoft Teams. Executed extensive functional verification, automated test validation, payroll computation audits, calendar tracking synchronization, and Department of Labor and Employment (DOLE) statutory labor compliance.',
     architectureHighlights: [
-      'TimeManagement: Comprehensive punch-in/out verification, break deduction audits, overtime authorization, and undertime tracking',
+      'Time Management: Comprehensive punch-in/out verification, break deduction audits, overtime authorization, and undertime tracking',
       'Payroll Sytem: Automated gross-to-net computation audit, statutory deductions (SSS, PhilHealth, Pag-IBIG), and tax withholding verification',
       'Calendar Tracker: Leave balance tracking, automated holiday roster scheduling, and cross-team shift coordination',
       'DOLE: Full Philippine Department of Labor and Employment statutory compliance, night shift differential, and holiday wage rates'
     ],
-    techStack: ['Quality Assurance', 'MS Teams Integration', 'TimeManagement', 'Payroll Sytem', 'Calendar Tracker', 'DOLE Compliance', 'Test Automation'],
+    techStack: ['Quality Assurance', 'MS Teams Integration', 'Time Management', 'Payroll Sytem', 'Calendar Tracker', 'DOLE Compliance', 'Test Automation'],
     layoutType: 'generative',
     accentColor: '#FB8B24',
     metrics: [
@@ -149,7 +149,7 @@ export const experienceData: ExperienceItem[] = [
     location: 'Philippines (MS Teams Integration)',
     description: 'Performed extensive quality assurance, automated test authoring, and regression verification for the Chronos Time and Payroll System deployed internally across MGen and integrated into Microsoft Teams.',
     achievements: [
-      'Executed full test verification on TimeManagement modules (punch-in/out, automated break deductions, and overtime authorizations).',
+      'Executed full test verification on Time Management modules (punch-in/out, automated break deductions, and overtime authorizations).',
       'Audited Payroll System computations for gross-to-net salary calculations, tax withholdings, and statutory Philippine labor deductions (SSS, PhilHealth, Pag-IBIG).',
       'Validated Calendar Tracker functionality for employee leave balances, holiday rosters, and shift schedules.',
       'Maintained 100% compliance with Department of Labor and Employment (DOLE) labor standards and wage rules.'
