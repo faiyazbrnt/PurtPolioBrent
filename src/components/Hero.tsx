@@ -103,14 +103,6 @@ export const Hero: React.FC<HeroProps> = ({ config, onExploreProjects, onResumeC
                 <span>EXPLORE WORK</span>
                 <ArrowDownRight className="w-4 h-4 transform group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
               </button>
-
-              <button
-                id="hero-resume-link"
-                onClick={onResumeClick}
-                className="text-xs font-editorial-mono uppercase tracking-[0.2em] text-[#E5E5E5]/60 hover:text-[#F5F3ED] transition-colors py-2"
-              >
-                [ VIEW CREDENTIALS ]
-              </button>
             </div>
           </motion.div>
 

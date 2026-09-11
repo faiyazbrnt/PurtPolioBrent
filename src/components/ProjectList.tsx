@@ -5,10 +5,9 @@ import { ProjectOneOps } from './projects/ProjectOneOps';
 
 interface ProjectListProps {
   projects: Project[];
-  onOpenDetails: (project: Project) => void;
 }
 
-export const ProjectList: React.FC<ProjectListProps> = ({ projects, onOpenDetails }) => {
+export const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   return (
     <section
       id="projects-section"
@@ -36,12 +35,12 @@ export const ProjectList: React.FC<ProjectListProps> = ({ projects, onOpenDetail
 
         {/* Project 01: Chronos Time and Payroll System */}
         {projects[0] && (
-          <ProjectChronos project={projects[0]} onOpenDetails={onOpenDetails} />
+          <ProjectChronos project={projects[0]} />
         )}
 
         {/* Project 02: OneOps System (TASS Management) */}
         {projects[1] && (
-          <ProjectOneOps project={projects[1]} onOpenDetails={onOpenDetails} />
+          <ProjectOneOps project={projects[1]} />
         )}
       </div>
     </section>

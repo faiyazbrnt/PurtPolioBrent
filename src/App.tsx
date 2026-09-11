@@ -5,7 +5,6 @@ import { HeaderMeta } from './components/HeaderMeta';
 import { Hero } from './components/Hero';
 import { ProjectList } from './components/ProjectList';
 import { FooterEditorial } from './components/FooterEditorial';
-import { ProjectModal } from './components/ProjectModal';
 import { DigitalResumeModal } from './components/DigitalResumeModal';
 import { PersonalizeModal } from './components/PersonalizeModal';
 import { CustomCursor } from './components/CustomCursor';
@@ -23,7 +22,6 @@ export default function App() {
     return initialPortfolioConfig;
   });
 
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [isPersonalizeOpen, setIsPersonalizeOpen] = useState<boolean>(false);
 
@@ -66,7 +64,6 @@ export default function App() {
         {/* Section 03 - Projects */}
         <ProjectList
           projects={portfolioProjects}
-          onOpenDetails={(project) => setSelectedProject(project)}
         />
       </main>
 
@@ -74,12 +71,6 @@ export default function App() {
       <FooterEditorial
         config={config}
         onResumeClick={() => setIsResumeOpen(true)}
-      />
-
-      {/* Architectural Deep Dive Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
       />
 
       {/* Digital Resume Modal (Curriculum Vitae with Print, Copy MD, Experience, Education) */}

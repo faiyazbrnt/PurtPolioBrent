@@ -1,0 +1,45 @@
+--- src/components/projects/ProjectChronos.tsx
++++ src/components/projects/ProjectChronos.tsx
+@@ -1,40 +1,11 @@
+-import React, { useState } from 'react';
+-import { motion, AnimatePresence } from 'motion/react';
++import React from 'react';
+ import { Project } from '../../types';
+ import {
+-  ArrowUpRight,
+-  Clock,
+-  DollarSign,
+-  Calendar,
+-  ShieldCheck,
+-  CheckCircle2,
+-  Play,
+-  RotateCcw,
+-  Check,
+   Building2,
+   Users,
+ } from 'lucide-react';
+ 
+ interface ProjectChronosProps {
+   project: Project;
+-  onOpenDetails: (project: Project) => void;
+ }
+ 
+-type SystemHighlightKey = 'timemanagement' | 'payroll' | 'calendar' | 'dole';
+-
+-export const ProjectChronos: React.FC<ProjectChronosProps> = ({ project, onOpenDetails }) => {
+-  const [activeHighlight, setActiveHighlight] = useState<SystemHighlightKey>('timemanagement');
+-  const [isRunningQaTests, setIsRunningQaTests] = useState<boolean>(false);
+-  const [testRunCount, setTestRunCount] = useState<number>(42);
+-  const [lastTestedTime, setLastTestedTime] = useState<string>('Just now');
+-
+-  const handleRunQaTests = () => {
+-    setIsRunningQaTests(true);
+-    setTimeout(() => {
+-      setTestRunCount((prev) => prev + 1);
+-      setLastTestedTime('Just now');
+-      setIsRunningQaTests(false);
+-    }, 600);
+-  };
+-
++export const ProjectChronos: React.FC<ProjectChronosProps> = ({ project }) => {
+   return (

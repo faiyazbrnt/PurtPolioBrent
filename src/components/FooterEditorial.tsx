@@ -108,9 +108,6 @@ export const FooterEditorial: React.FC<FooterEditorialProps> = ({ config, onResu
             <p>
               &copy; {new Date().getFullYear()} {config.developerName}. ALL RIGHTS RESERVED.
             </p>
-            <p className="text-[10px] sm:text-[11px] text-white/30">
-              CRAFTED WITH BURGUNDY (#9A031E) &bull; SWISS EDITORIAL COMPOSITION &bull; REACT 19 &bull; TAILWIND
-            </p>
           </div>
 
           <button

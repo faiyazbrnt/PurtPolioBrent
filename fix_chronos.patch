@@ -1,0 +1,84 @@
+--- src/components/projects/ProjectChronos.tsx
++++ src/components/projects/ProjectChronos.tsx
+@@ -58,68 +58,47 @@
+             <div className="flex items-center justify-between text-xs font-editorial-mono text-white/50">
+               <span className="uppercase tracking-[0.2em] text-[#FB8B24]">
+                 SYSTEM HIGHLIGHTS:
+               </span>
+-              <span className="text-[10px]">CLICK TO AUDIT IN CONSOLE</span>
+             </div>
+ 
+             <div className="grid grid-cols-2 gap-2 font-editorial-mono text-xs">
+-              <button
+-                onClick={() => setActiveHighlight('timemanagement')}
+-                className={`p-3 border text-left transition-all flex flex-col justify-between h-20 ${
+-                  activeHighlight === 'timemanagement'
+-                    ? 'border-[#FB8B24] bg-[#FB8B24]/10 text-[#F5F3ED]'
+-                    : 'border-white/10 bg-[#0F0205] text-white/70 hover:border-white/30'
+-                }`}
++              <div
++                className="p-3 border text-left transition-all flex flex-col justify-between h-20 border-white/10 bg-[#0F0205] text-white/70"
+               >
+                 <div className="flex items-center justify-between">
+                   <Clock className="w-4 h-4 text-[#FB8B24]" />
+                   <span className="text-[10px] text-white/40">01</span>
+                 </div>
+                 <span className="font-semibold text-xs tracking-tight">TimeManagement</span>
+-              </button>
++              </div>
+ 
+-              <button
+-                onClick={() => setActiveHighlight('payroll')}
+-                className={`p-3 border text-left transition-all flex flex-col justify-between h-20 ${
+-                  activeHighlight === 'payroll'
+-                    ? 'border-[#FB8B24] bg-[#FB8B24]/10 text-[#F5F3ED]'
+-                    : 'border-white/10 bg-[#0F0205] text-white/70 hover:border-white/30'
+-                }`}
++              <div
++                className="p-3 border text-left transition-all flex flex-col justify-between h-20 border-white/10 bg-[#0F0205] text-white/70"
+               >
+                 <div className="flex items-center justify-between">
+                   <DollarSign className="w-4 h-4 text-emerald-400" />
+                   <span className="text-[10px] text-white/40">02</span>
+                 </div>
+                 <span className="font-semibold text-xs tracking-tight">Payroll Sytem</span>
+-              </button>
++              </div>
+ 
+-              <button
+-                onClick={() => setActiveHighlight('calendar')}
+-                className={`p-3 border text-left transition-all flex flex-col justify-between h-20 ${
+-                  activeHighlight === 'calendar'
+-                    ? 'border-[#FB8B24] bg-[#FB8B24]/10 text-[#F5F3ED]'
+-                    : 'border-white/10 bg-[#0F0205] text-white/70 hover:border-white/30'
+-                }`}
++              <div
++                className="p-3 border text-left transition-all flex flex-col justify-between h-20 border-white/10 bg-[#0F0205] text-white/70"
+               >
+                 <div className="flex items-center justify-between">
+                   <Calendar className="w-4 h-4 text-sky-400" />
+                   <span className="text-[10px] text-white/40">03</span>
+                 </div>
+                 <span className="font-semibold text-xs tracking-tight">Calendar Tracker</span>
+-              </button>
++              </div>
+ 
+-              <button
+-                onClick={() => setActiveHighlight('dole')}
+-                className={`p-3 border text-left transition-all flex flex-col justify-between h-20 ${
+-                  activeHighlight === 'dole'
+-                    ? 'border-[#FB8B24] bg-[#FB8B24]/10 text-[#F5F3ED]'
+-                    : 'border-white/10 bg-[#0F0205] text-white/70 hover:border-white/30'
+-                }`}
++              <div
++                className="p-3 border text-left transition-all flex flex-col justify-between h-20 border-white/10 bg-[#0F0205] text-white/70"
+               >
+                 <div className="flex items-center justify-between">
+                   <ShieldCheck className="w-4 h-4 text-amber-300" />
+                   <span className="text-[10px] text-white/40">04</span>
+                 </div>
+                 <span className="font-semibold text-xs tracking-tight">DOLE</span>
+-              </button>
++              </div>
+             </div>
+           </div>
