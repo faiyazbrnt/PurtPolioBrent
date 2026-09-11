@@ -11,6 +11,7 @@ import {
   Printer,
   Copy,
   Check,
+  Download,
   Mail,
   Github,
   MapPin,
@@ -163,6 +164,17 @@ ${config.references || 'Available Upon Request'}
             </div>
 
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              <a
+                href="/Brent_Go_Resume.pdf"
+                download="Brent_Go_Resume.pdf"
+                className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 border border-[#FB8B24]/40 hover:border-[#FB8B24] text-[11px] sm:text-xs font-editorial-mono uppercase text-[#FB8B24] transition-colors"
+                title="Download Resume PDF"
+                aria-label="Download Resume PDF"
+              >
+                <Download className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden sm:inline">DOWNLOAD PDF</span>
+              </a>
+
               <button
                 onClick={handlePrint}
                 className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 border border-[#F5F3ED]/20 hover:border-white text-[11px] sm:text-xs font-editorial-mono uppercase text-[#F5F3ED] transition-colors"
