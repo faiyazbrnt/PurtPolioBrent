@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #9A031E;
+    --foreground: #11151A;
+    --heading: #F5F3ED;
+    --body: #D0D0D0;
+    --navigation: #E5E5E5;
+
+    --accent-purple: #5F0F40;
+    --accent-orange: #FB8B24;
+    --accent-red-orange: #E36414;
+    --accent-teal: #0F4C5C;
+  }
+
+  html {
+    background-color: var(--background);
+    color: var(--body);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--body);
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.font-editorial-serif {
+  font-family: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-editorial-sans {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+.font-editorial-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom scrollbar matching burgundy aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #5F0F40;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 243, 237, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 243, 237, 0.5);
+}
+
+/* Print styles for digital resume */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
