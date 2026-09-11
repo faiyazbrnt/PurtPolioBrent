@@ -159,7 +159,7 @@ ${config.references || 'Available Upon Request'}
               </span>
               <span className="text-white/30 hidden lg:inline">|</span>
               <span className="text-xs font-editorial-mono text-white/50 hidden lg:inline whitespace-nowrap truncate">
-                FULLSTACK DEVELOPER &amp; QA ENGINEER
+                {config.developerRole.toUpperCase()}
               </span>
             </div>
 

@@ -2,7 +2,7 @@ import { PortfolioConfig, Project, ExperienceItem, EducationItem, TechnicalCateg
 
 export const initialPortfolioConfig: PortfolioConfig = {
   developerName: 'Brent Liam Emmanuel L. Go',
-  developerRole: 'Fullstack Developer & QA Engineer',
+  developerRole: 'Aspiring Fullstack Developer & QA Engineer',
   availability: 'Available for IT Internship & Full-Time Opportunities',
   location: 'Grand Monaco La Potenza, Block 16 Lot 4, Pasig City',
   phone: '0915-475-5930',

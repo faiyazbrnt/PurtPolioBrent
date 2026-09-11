@@ -100,7 +100,7 @@ export const PersonalizeModal: React.FC<PersonalizeModalProps> = ({
                   value={formData.developerRole}
                   onChange={(e) => setFormData({ ...formData, developerRole: e.target.value })}
                   className="w-full bg-[#0F0205] border border-white/15 px-3 py-2 text-[#F5F3ED] focus:border-[#FB8B24] focus:outline-none"
-                  placeholder="e.g. Fullstack Developer & QA Engineer"
+                  placeholder="e.g. Aspiring Fullstack Developer & QA Engineer"
                 />
               </div>
 
