@@ -98,7 +98,7 @@ export default function App() {
           onResumeClick={() => setIsResumeOpen(true)}
         />
 
-        {/* Section 03 - Projects */}
+        {/* Section - Projects */}
         <ProjectList
           projects={portfolioProjects}
         />

@@ -1,75 +1,170 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 
 export const CustomCursor: React.FC = () => {
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isInteractive, setIsInteractive] = useState<boolean>(false);
+  const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
   const [cursorText, setCursorText] = useState<string>('');
-  const [isHoveredInteractive, setIsHoveredInteractive] = useState<boolean>(false);
 
+  // Exact pointer coordinates for zero-latency point tracking
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Smooth springs for fluid latency-free tracking
-  const springConfig = { damping: 28, stiffness: 350, mass: 0.5 };
-  const cursorX = useSpring(mouseX, springConfig);
-  const cursorY = useSpring(mouseY, springConfig);
+  // Ultra-responsive, snappy spring for the trailing halo (low mass, high stiffness = zero lag)
+  const springConfig = { damping: 28, stiffness: 750, mass: 0.1 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  // Check if device supports hover and fine pointer, and has desktop viewport
+  const checkCapability = useCallback(() => {
+    if (typeof window === 'undefined') return false;
+    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const isDesktopWidth = window.innerWidth >= 768;
+    return hasFinePointer && isDesktopWidth;
+  }, []);
 
   useEffect(() => {
-    // Only enable custom cursor on fine pointer devices (desktop mouse, not touch)
-    if (typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches) {
-      setIsEnabled(true);
-    } else {
-      return;
-    }
+    const updateCapability = () => {
+      const capable = checkCapability();
+      setIsEnabled(capable);
+      if (!capable) {
+        setIsVisible(false);
+      }
+    };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    updateCapability();
+
+    // Responsive listeners for screen resize and media query changes (e.g. rotating device, DevTools responsive mode)
+    window.addEventListener('resize', updateCapability);
+    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    mediaQuery.addEventListener?.('change', updateCapability);
+
+    // Disable if touch event is fired (e.g. hybrid touchscreen laptop or mobile tap)
+    const handleTouch = () => {
+      setIsVisible(false);
+      setIsEnabled(false);
+    };
+    window.addEventListener('touchstart', handleTouch, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', updateCapability);
+      mediaQuery.removeEventListener?.('change', updateCapability);
+      window.removeEventListener('touchstart', handleTouch);
+    };
+  }, [checkCapability]);
+
+  useEffect(() => {
+    if (!isEnabled) return;
+
+    const handlePointerMove = (e: PointerEvent) => {
+      // Ignore touch pointers
+      if (e.pointerType === 'touch') {
+        setIsVisible(false);
+        return;
+      }
+
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
 
-      // Check target element to detect interactive states
       const target = e.target as HTMLElement | null;
-      if (!target) return;
+      if (!target) {
+        setIsInteractive(false);
+        setCursorText('');
+        return;
+      }
 
-      const isInteractive = Boolean(
-        target.closest('button') ||
-          target.closest('a') ||
-          target.closest('input') ||
-          target.closest('[role="button"]')
+      // Check if target or ancestor is interactive
+      const interactiveEl = target.closest(
+        'button, a, input, textarea, select, [role="button"], [role="link"], label, summary'
       );
-      setIsHoveredInteractive(isInteractive);
+      setIsInteractive(Boolean(interactiveEl));
 
-      // Check if hovering a project card or visual area
-      const projectEl = target.closest('[id*="project-"]');
-      if (projectEl && !isInteractive) {
+      // Subtle contextual tag only on project banner/preview headers, not blocking text
+      const projectCardHeader = target.closest('[data-cursor="view"]');
+      if (projectCardHeader && !interactiveEl) {
         setCursorText('VIEW');
       } else {
         setCursorText('');
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+    const handlePointerDown = () => setIsMouseDown(true);
+    const handlePointerUp = () => setIsMouseDown(false);
 
-  if (!isEnabled) return null;
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (!e.relatedTarget) {
+        setIsVisible(false);
+      }
+    };
+
+    const handleMouseEnter = () => {
+      setIsVisible(true);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerdown', handlePointerDown);
+    window.addEventListener('pointerup', handlePointerUp);
+    document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+    document.documentElement.addEventListener('mouseenter', handleMouseEnter);
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointerup', handlePointerUp);
+      document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
+      document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
+    };
+  }, [isEnabled, isVisible, mouseX, mouseY]);
+
+  if (!isEnabled || !isVisible) return null;
 
   return (
-    <motion.div
-      style={{
-        x: cursorX,
-        y: cursorY,
-        translateX: '-50%',
-        translateY: '-50%',
-      }}
-      className={`fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center rounded-full transition-[width,height,background-color,border-color] duration-200 ${
-        cursorText
-          ? 'w-16 h-16 bg-[#FB8B24] text-[#11151A] font-editorial-mono text-[10px] font-bold tracking-widest'
-          : isHoveredInteractive
-            ? 'w-8 h-8 border-2 border-[#FB8B24] bg-transparent'
-            : 'w-3.5 h-3.5 bg-[#F5F3ED] mix-blend-difference'
-      }`}
-    >
-      {cursorText && <span>{cursorText}</span>}
-    </motion.div>
+    <>
+      {/* 1. Instant Precision Center Dot (Follows exact mouse coordinates with 0ms lag) */}
+      <motion.div
+        aria-hidden="true"
+        style={{
+          x: mouseX,
+          y: mouseY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+        className="fixed top-0 left-0 pointer-events-none z-[9999] no-print"
+      >
+        <div
+          className={`w-1.5 h-1.5 rounded-full transition-transform duration-150 ${
+            isInteractive ? 'bg-[#FB8B24] scale-150' : 'bg-[#FB8B24]'
+          }`}
+        />
+      </motion.div>
+
+      {/* 2. Responsive Halo / Ring (Ultra-fast spring physics, tactile click feedback) */}
+      <motion.div
+        aria-hidden="true"
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+        animate={{
+          scale: isMouseDown ? 0.8 : isInteractive ? 1.35 : 1,
+        }}
+        transition={{ duration: 0.15, ease: 'easeOut' }}
+        className={`fixed top-0 left-0 pointer-events-none z-[9998] rounded-full flex items-center justify-center transition-[width,height,border-color,background-color] duration-150 no-print ${
+          cursorText
+            ? 'w-14 h-14 bg-[#FB8B24] text-[#11151A] font-editorial-mono text-[10px] font-bold tracking-widest'
+            : isInteractive
+              ? 'w-9 h-9 border border-[#FB8B24] bg-[#FB8B24]/10'
+              : 'w-7 h-7 border border-[#11151A]/30 dark:border-[#F5F3ED]/30'
+        }`}
+      >
+        {cursorText && <span className="select-none">{cursorText}</span>}
+      </motion.div>
+    </>
   );
 };
+

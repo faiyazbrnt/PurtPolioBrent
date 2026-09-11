@@ -18,9 +18,8 @@ export const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#11151A]/15 dark:border-[#F5F3ED]/15 pb-5 sm:pb-6">
           <div className="space-y-1.5 sm:space-y-2">
             <div className="flex items-center gap-2 text-xs font-editorial-mono text-[#FB8B24] uppercase tracking-[0.2em] sm:tracking-[0.25em]">
-              <span>SECTION // 03</span>
-              <span>—</span>
-              <span className="text-[#11151A] dark:text-[#F5F3ED] font-semibold sm:font-normal">PROJECTS</span>
+              <span>SECTION //</span>
+              <span className="text-[#11151A] dark:text-[#F5F3ED] font-semibold sm:font-normal">- PROJECTS</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-editorial-serif text-[#11151A] dark:text-[#F5F3ED] font-normal tracking-tight">
               Projects
