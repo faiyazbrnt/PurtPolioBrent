@@ -132,7 +132,7 @@ export const CustomCursor: React.FC = () => {
           translateX: '-50%',
           translateY: '-50%',
         }}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] no-print"
+        className="custom-cursor fixed top-0 left-0 pointer-events-none z-[9999] no-print"
       >
         <div
           className={`w-1.5 h-1.5 rounded-full transition-transform duration-150 ${
@@ -154,7 +154,7 @@ export const CustomCursor: React.FC = () => {
           scale: isMouseDown ? 0.8 : isInteractive ? 1.35 : 1,
         }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 pointer-events-none z-[9998] rounded-full flex items-center justify-center transition-[width,height,border-color,background-color] duration-150 no-print ${
+        className={`custom-cursor fixed top-0 left-0 pointer-events-none z-[9998] rounded-full flex items-center justify-center transition-[width,height,border-color,background-color] duration-150 no-print ${
           cursorText
             ? 'w-14 h-14 bg-[#FB8B24] text-[#11151A] font-editorial-mono text-[10px] font-bold tracking-widest'
             : isInteractive

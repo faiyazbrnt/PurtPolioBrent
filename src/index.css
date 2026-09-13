@@ -37,6 +37,21 @@
     margin: 0;
     padding: 0;
   }
+
+  /* Smooth and minimalistic dark mode switching of interface elements */
+  *,
+  *::before,
+  *::after {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, outline-color, box-shadow;
+    transition-duration: 380ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Prevent theme transitions on elements that require zero-latency cursor tracking */
+  .custom-cursor,
+  .custom-cursor * {
+    transition: none !important;
+  }
 }
 
 .font-editorial-serif {
